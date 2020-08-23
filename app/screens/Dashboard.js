@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Slider from 'react-native-slide-to-unlock';
 import { ExBanner, ExButton } from '../components';
-import { selectBannerStatus } from '../state/Settings';
+import { selectBannerStatus, selectDeviceType } from '../state/Settings';
 import { selectUser } from '../state/User';
 import config from '../config';
 import { useBackButton } from '../customHooks';
@@ -12,6 +12,7 @@ import { useBackButton } from '../customHooks';
 const Dashboard = ({ navigation }) => {
   const bannerStatus = useSelector(selectBannerStatus);
   const user = useSelector(selectUser);
+  const deviceType = useSelector(selectDeviceType);
 
   navigation.setOptions({
     headerRight: () => (
@@ -34,7 +35,7 @@ const Dashboard = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.contentView}>
-      {bannerStatus && <ExBanner />}
+      {bannerStatus && deviceType && <ExBanner deviceType={deviceType} />}
       <View style={styles.container}>
         <ExButton
           buttonStyle={styles.settingsButton}

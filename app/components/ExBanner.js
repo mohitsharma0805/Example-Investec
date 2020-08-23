@@ -1,24 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+import { View, Text, StyleSheet } from 'react-native';
 import config from '../config';
 
-const ExBanner = () => {
-  const getDeviceType = () => {
-    let deviceType = DeviceInfo.getModel();
-    if (DeviceInfo.isEmulatorSync) {
-      if (Platform.OS === 'ios') {
-        deviceType = 'Simutator';
-      } else {
-        deviceType = 'Emulator';
-      }
-    }
-    return deviceType;
-  };
-
+const ExBanner = ({ deviceType }) => {
   return (
     <View style={styles.contentView}>
-      <Text style={styles.text}>{getDeviceType()}</Text>
+      <Text style={styles.text}>{deviceType}</Text>
     </View>
   );
 };

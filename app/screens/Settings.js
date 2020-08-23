@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ExBanner, ExSwitchCell } from '../components';
-import { selectBannerStatus, saveBannerStatus } from '../state/Settings';
+import { selectBannerStatus, saveBannerStatus, selectDeviceType } from '../state/Settings';
 import { selectUser } from '../state/User';
 import config from '../config';
 import { useBackButton } from '../customHooks';
@@ -10,6 +10,7 @@ import { useBackButton } from '../customHooks';
 const Settings = ({ navigation }) => {
   const dispatch = useDispatch();
   const bannerStatus = useSelector(selectBannerStatus);
+  const deviceType = useSelector(selectDeviceType);
   const user = useSelector(selectUser);
 
   navigation.setOptions({
@@ -33,7 +34,7 @@ const Settings = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.contentView}>
-      {bannerStatus && <ExBanner />}
+      {bannerStatus && deviceType && <ExBanner deviceType={deviceType} />}
       <ExSwitchCell switchValue={bannerStatus} onSwitchValueChange={switchValueChanged} />
     </SafeAreaView>
   );

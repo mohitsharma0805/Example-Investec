@@ -5,17 +5,23 @@ import { StackActions } from '@react-navigation/native';
 import { ExButton, ExTextInput, ExBanner } from '../components';
 import config from '../config';
 import { validateUserDetails } from '../controls/Validator';
-import { selectBannerStatus } from '../state/Settings';
+import { selectBannerStatus, saveDeviceType, selectDeviceType } from '../state/Settings';
 import { selectUser, saveUser } from '../state/User';
+import { getDeviceInfoFromNativeModule } from '../nativeModules/NativeDeviceInfo';
 
 const Welcome = ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const bannerStatus = useSelector(selectBannerStatus);
+  const deviceType = useSelector(selectDeviceType);
   const user = useSelector(selectUser);
 
   useEffect(() => {
     detailsSavedSuccessfully();
+
+    getDeviceInfoFromNativeModule((callback) => {
+      dispatch(saveDeviceType(callback.isEmulator));
+    });
   }, [user]);
 
   const detailsSavedSuccessfully = () => {
@@ -32,7 +38,7 @@ const Welcome = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.contentView}>
-      {bannerStatus && <ExBanner />}
+      {bannerStatus && deviceType && <ExBanner deviceType={deviceType} />}
       <View style={styles.container}>
         <ExTextInput
           placeholder={config.strings.ENTER_YOUR_NAME}
