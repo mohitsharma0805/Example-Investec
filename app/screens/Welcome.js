@@ -13,8 +13,8 @@ const Welcome = ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const bannerStatus = useSelector(selectBannerStatus);
-  const deviceType = useSelector(selectDeviceType);
   const user = useSelector(selectUser);
+  const deviceType = useSelector(selectDeviceType);
 
   useEffect(() => {
     detailsSavedSuccessfully();

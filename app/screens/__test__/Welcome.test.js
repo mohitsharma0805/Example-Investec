@@ -17,12 +17,14 @@ describe('Welcome', () => {
     const store = mockStore({
       banner: true,
       user: {},
+      deviceType: 'Device',
     });
 
     jest
       .spyOn(redux, 'useSelector')
       .mockImplementationOnce(() => store.getState().banner)
-      .mockImplementationOnce(() => store.getState().user);
+      .mockImplementationOnce(() => store.getState().user)
+      .mockImplementationOnce(() => store.getState().deviceType);
 
     const wrapper = shallow(<Welcome navigation={navigation} />);
     it('renders the main view', () => {

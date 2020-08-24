@@ -17,9 +17,15 @@ describe('Settings', () => {
     };
     const store = mockStore({
       banner: true,
+      deviceType: 'Device',
+      user: { name: 'mohit' },
     });
 
-    jest.spyOn(redux, 'useSelector').mockImplementationOnce(() => store.getState().banner);
+    jest
+      .spyOn(redux, 'useSelector')
+      .mockImplementationOnce(() => store.getState().banner)
+      .mockImplementationOnce(() => store.getState().deviceType)
+      .mockImplementationOnce(() => store.getState().user);
 
     const wrapper = shallow(<Settings navigation={navigation} />);
     it('renders the main view', () => {

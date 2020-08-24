@@ -18,10 +18,6 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn((data) => data),
 }));
 
-jest.mock('react-native-device-info', () => ({
-  getModel: jest.fn(),
-}));
-
 jest.mock('../app/state/User', () => {
   return {
     saveUser: jest.fn(),
@@ -31,5 +27,6 @@ jest.mock('../app/state/User', () => {
 jest.mock('../app/state/Settings', () => {
   return {
     saveBannerStatus: jest.fn(),
+    saveDeviceType: jest.fn(),
   };
 });

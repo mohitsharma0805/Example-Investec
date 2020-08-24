@@ -17,12 +17,14 @@ describe('Dashboard', () => {
     const store = mockStore({
       banner: true,
       user: { name: 'mohit' },
+      deviceType: 'Device',
     });
 
     jest
       .spyOn(redux, 'useSelector')
       .mockImplementationOnce(() => store.getState().banner)
-      .mockImplementationOnce(() => store.getState().user);
+      .mockImplementationOnce(() => store.getState().user)
+      .mockImplementationOnce(() => store.getState().deviceType);
 
     const wrapper = shallow(<Dashboard navigation={navigation} />);
     it('renders the main view', () => {
